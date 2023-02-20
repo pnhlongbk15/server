@@ -1,7 +1,7 @@
 
 module.exports = app => {
         // cors
-        const cors = require('cosrs')
+        // const cors = require('cosrs')
         // app.use(cors({
         //         origin: '*'
         // }))
