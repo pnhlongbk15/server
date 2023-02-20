@@ -4,8 +4,9 @@ const sql = require('../configs/db.connection');
 
 
 Product.getCategory = (cb) => {
-   sql.query('SELECT DISTINCT category FROM product', (error, result) => {
+   sql.query('SELECT DISTINCT category FROM Product', (error, result) => {
       if (error) {
+         console.log(error)
          cb(error, null);
          return;
       }
@@ -13,7 +14,7 @@ Product.getCategory = (cb) => {
    })
 }
 Product.getBrand = (data, cb) => {
-   let statement = 'SELECT DISTINCT brand FROM attribute'
+   let statement = 'SELECT DISTINCT brand FROM Attribute'
 
    if (data.length) {
       statement = statement + ' ' + 'WHERE'
@@ -112,10 +113,10 @@ Product.findAllByCategory = (data, cb) => {
 }
 
 Product.getDetail = (category, id, cb) => {
-   const statement = `  SELECT * FROM product, attribute
-                        WHERE product.id = '${id}'
-                        AND product.category = '${category}'
-                        AND product.attrId = attribute.id `
+   const statement = `  SELECT * FROM Product as p, Attribute as a
+                        WHERE p.productId = '${id}'
+                        AND p.category = '${category}'
+                        AND p.attrId = a.attrId `
    console.log(statement)
    sql.query(statement, (error, result) => {
       if (error) {
@@ -139,8 +140,9 @@ Product.drop = (product, data, cb) => {
       }
    })
 }
+
 Product.updateAttrs = (attrId, data, cb) => {
-   const statement = attrId ? `UPDATE attribute SET ?` : `INSERT INTO attribute SET ? `
+   const statement = attrId ? `UPDATE Attribute SET ?` : `INSERT INTO Attribute SET ? `
    console.log(data, statement)
    sql.query(statement, data, (error, result) => {
       console.log(error)
@@ -166,7 +168,7 @@ Product.updateAttrs = (attrId, data, cb) => {
 
 Product.order = (data, cb) => {
    console.log(data)
-   sql.query('INSERT INTO orders SET ?', data.order, (error, result) => {
+   sql.query('INSERT INTO Orders SET ?', data.order, (error, result) => {
       if (error) {
          cb(error, null)
       }
@@ -176,7 +178,7 @@ Product.order = (data, cb) => {
          try {
             data.detailOrder.forEach(detail => {
                console.log(detail)
-               sql.query('INSERT INTO detailOrder SET ?', detail, (error, result) => {
+               sql.query('INSERT INTO DetailOrder SET ?', detail, (error, result) => {
                   if (error) {
                      console.log(error)
                      throw new Error(error.message)

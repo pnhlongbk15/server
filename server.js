@@ -27,5 +27,10 @@ app.set('view engine', 'ejs');
 app.set('views', 'api/views');
 app.use(express.static('api/public'));
 
+
+app.use((req,res,next) => {
+        console.log(req.body)
+        next()
+})
 // routes
 routes(app);

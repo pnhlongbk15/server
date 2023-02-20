@@ -1,5 +1,5 @@
 const Token = function (token) {
-        this.id = token.id;
+        this.tokenId = token.tokenId;
         this.value = token.value;
         this.userId = token.userId;
 }

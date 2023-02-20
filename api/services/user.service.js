@@ -3,8 +3,9 @@ const sql = require('../configs/db.connection')
 
 User.create = (newUser, cb) => {
    console.log(newUser)
-   sql.query("INSERT INTO user SET ?", newUser, (error, result) => {
+   sql.query("INSERT INTO User SET ?", newUser, (error, result) => {
       if (error) {
+         console.log(error)
          cb(error, null);
          return;
       }
@@ -17,7 +18,7 @@ User.create = (newUser, cb) => {
 }
 
 User.find = (info, cb) => {
-   sql.query("SELECT * FROM user WHERE ?", info, (error, result) => {
+   sql.query("SELECT * FROM User WHERE ?", info, (error, result) => {
       if (error) {
          cb(error, null);
          return;
@@ -27,7 +28,7 @@ User.find = (info, cb) => {
 }
 
 User.drop = (info, cb) => {
-   sql.query("DELETE FROM user WHERE ?", info, (error, result) => {
+   sql.query("DELETE FROM User WHERE ?", info, (error, result) => {
       if (error) {
          cb(error, null);
          return;
@@ -41,7 +42,7 @@ User.drop = (info, cb) => {
 }
 
 User.profile = (userId, cb) => {
-   sql.query("SELECT username, email, phone, sex, birth FROM user WHERE ?", userId, (error, result) => {
+   sql.query("SELECT username, email, phone, sex, birth FROM User WHERE ?", userId, (error, result) => {
       if (error) {
          const message = {
             query: error.sql,
@@ -55,7 +56,7 @@ User.profile = (userId, cb) => {
 }
 
 User.updateProfile = (profile, userId, cb) => {
-   const statement = `UPDATE user SET ? WHERE id = '${userId.id}'`
+   const statement = `UPDATE User SET ? WHERE userId = '${userId.id}'`
    console.log(statement)
    sql.query(statement, profile, (error, result) => {
       console.log(error, result)
@@ -76,7 +77,7 @@ User.updateProfile = (profile, userId, cb) => {
 }
 
 User.address = (userId, cb) => {
-   sql.query(`SELECT * FROM address WHERE ?`, userId, (error, result) => {
+   sql.query(`SELECT * FROM Address WHERE ?`, userId, (error, result) => {
       if (error) {
          const message = {
             query: error.sql,
@@ -92,7 +93,7 @@ User.address = (userId, cb) => {
 }
 
 User.addAddress = (data, cb) => {
-   sql.query('INSERT INTO address SET ?', data, (error, result) => {
+   sql.query('INSERT INTO Address SET ?', data, (error, result) => {
       if (error) {
          const message = {
             query: error.sql,
@@ -110,7 +111,7 @@ User.addAddress = (data, cb) => {
 }
 
 User.updateAddress = (data, cond, cb) => {
-   sql.query('UPDATE address SET ? WHERE ?', [data, cond], (error, result) => {
+   sql.query('UPDATE Address SET ? WHERE ?', [data, cond], (error, result) => {
       if (error) {
          const message = {
             query: error.sql,
@@ -128,7 +129,7 @@ User.updateAddress = (data, cond, cb) => {
 }
 
 User.updateAvatar = (data, cb) => {
-   sql.query('UPDATE user SET ? WHERE ?', data, (error, result) => {
+   sql.query('UPDATE User SET ? WHERE ?', data, (error, result) => {
       if (error) {
          const message = {
             query: error.sql,
@@ -146,7 +147,7 @@ User.updateAvatar = (data, cb) => {
 }
 
 User.avatar = (userId, cb) => {
-   sql.query('SELECT image FROM user WHERE ?', userId, (error, result) => {
+   sql.query('SELECT image FROM User WHERE ?', userId, (error, result) => {
       if (error) {
          const message = {
             query: error.sql,

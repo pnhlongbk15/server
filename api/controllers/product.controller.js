@@ -5,6 +5,7 @@ const { Product, Attribute, ByProduct, Orders, DetailOrder } = require('../servi
 module.exports = {
    getCategory: (req, res) => {
       Product.getCategory((error, data) => {
+         console.log(error,data)
          if (error) {
             console.log(error)
             res.status(400).json({ error: error.name, message: "Get category fail." })
@@ -59,7 +60,7 @@ module.exports = {
    updateAttrsProduct: (req, res) => {
       const { attrId } = req.body
       const data = new Attribute({
-         id: attrId ? attrId : uuidv4(),
+         attrId: attrId ? attrId : uuidv4(),
          productId: req.body.id,
          type: req.body.type,
          rating: req.body.rating,
@@ -100,7 +101,7 @@ module.exports = {
       })
       for (i = 0; i < req.body.products.length; i++) {
          data.detailOrder.push(new DetailOrder({
-            id: uuidv4(),
+            detailId: uuidv4(),
             orderId: data.order.id,
             productId: req.body.products[i].productId,
             quantity: req.body.products[i].quantity,

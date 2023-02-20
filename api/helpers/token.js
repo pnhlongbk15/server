@@ -3,10 +3,10 @@ const Token = require('../services/token.service')
 
 module.exports = {
     generateAccessToken: (user) => {
-        console.log(user.id)
+        console.log(user.userId)
         return jwt.sign(
             {
-                userId: user.id,
+                userId: user.userId,
                 isAdmin: user.isAdmin
             },
             'c04dab6bd71111a83f8dab1b749e5c92',
@@ -16,7 +16,7 @@ module.exports = {
     generateRefreshToken: (user) => {
         return jwt.sign(
             {
-                userId: user.id,
+                userId: user.userId,
                 isAdmin: user.isAdmin
             },
             process.env.REFRESH_SECRET_KEY,

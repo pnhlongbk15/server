@@ -8,11 +8,12 @@ const tokenUtil = require('../helpers/token')
 module.exports = {
     signUp: async (req, res) => {
         // create a user
+        console.log('signUp')
         if (!res.locals?.check) {
             passwordUtil.encode(req.body.password)
                 .then(hash => {
                     const user = new User({
-                        id: uuidv4(),
+                        userId: uuidv4(),
                         username: req.body.username,
                         email: req.body.email,
                         password: hash,
@@ -47,7 +48,7 @@ module.exports = {
                         const refreshToken = tokenUtil.generateRefreshToken(res.locals.check);
 
                         const token = new Token({
-                            id: uuidv4(),
+                            tokenId: uuidv4(),
                             value: refreshToken,
                             userId: userId
                         })
@@ -63,24 +64,29 @@ module.exports = {
                                             sameSite: 'strict'
                                         })
                                         // success for login
-                                        res.status(201).json({ status: 'success', username, accessToken: `Bearer ${accessToken}` });
+                                        res.status(201).json({
+                                            status: 'success',
+                                            message: 'Login success.',
+                                            username,
+                                            accessToken: `Bearer ${accessToken}`
+                                        });
                                     }
                                 })
                             } else {
                                 // database has refresh token but drop it unsuccessful.
-                                res.status(403).json({ status: 'fail', message: 'login unsuccesful.' });
+                                res.status(403).json({ status: 'error', message: 'login unsuccesful.' });
                             }
                         }).catch(error => {
-                            res.status(400).json({ error: error.message });
+                            res.status(400).json({ status: 'error', message: error.message });
                         })
                     } else {
-                        res.status(403).json({ status: 'fail', message: 'incorrect password' })
+                        res.status(403).json({ status: 'error', message: 'incorrect password' })
                     }
                 }).catch(error => {
-                    res.status(400).json({ error: error.message });
+                    res.status(400).json({ status: 'error', message: error.message });
                 })
         } else {
-            res.status(404).json({ status: 'fail', message: "user doesn't exists." });
+            res.status(404).json({ status: 'error', message: "user doesn't exists." });
         }
     },
     removeAccount: (req, res) => {
@@ -108,9 +114,10 @@ module.exports = {
     updateProfile: (req, res) => {
         const profile = req.body;
         const userId = {
-            id: res.locals.id || "163e94cc-2888-4d37-b7cb-0c5611568b3a"
+            id: res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c"
         }
-        User.update(profile, userId, (error, data) => {
+        console.log(profile)
+        User.updateProfile(profile, userId, (error, data) => {
             if (error) {
                 console.error(error)
                 res.status(400).json({ error: error.error });
@@ -121,7 +128,7 @@ module.exports = {
     },
     address: (req, res) => {
         const userId = {
-            userId: res.locals.id || "f4922e10-7db8-4414-b41d-633577f9a884"
+            userId: res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c"
         }
         User.address(userId, (error, data) => {
             if (error) {
@@ -135,8 +142,8 @@ module.exports = {
     addAddress: (req, res) => {
         console.log(req.body, 'addAddress')
         const data = { ...req.body };
-        data.userId = res.locals.id || "f4922e10-7db8-4414-b41d-633577f9a884";
-        data.id = uuidv4();
+        data.userId = res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c";
+        data.addressId = uuidv4();
 
         User.addAddress(data, (error, data) => {
             if (error) {
@@ -149,7 +156,7 @@ module.exports = {
     },
     updateAddress: (req, res) => {
         const data = { ...req.body }
-        const cond = { userId: res.locals.id || "f4922e10-7db8-4414-b41d-633577f9a884" }
+        const cond = { userId: res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c" }
         User.updateAddress(data, cond, (error, data) => {
             if (error) {
                 console.error(error)
@@ -165,7 +172,7 @@ module.exports = {
 
         const data = [
             { image: req.file.buffer.toString('base64') },
-            { id: res.locals.id || "163e94cc-2888-4d37-b7cb-0c5611568b3a" }
+            { userId: res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c" }
         ]
         User.updateAvatar(data, (error, data) => {
             if (error) {
@@ -181,7 +188,7 @@ module.exports = {
     },
     avatar: (req, res) => {
         const userId = {
-            id: res.locals.id || "163e94cc-2888-4d37-b7cb-0c5611568b3a"
+            userId: res.locals.id || "d38d214d-c7ed-48d3-8144-3dcb3253c29c"
         }
         User.avatar(userId, (error, data) => {
             if (error) {
@@ -189,6 +196,7 @@ module.exports = {
                 res.status(400).json({ error: error.error });
                 return;
             }
+            console.log('res',data)
             res.status(200).json({ status: 'success', avatar: data.avatar })
         })
     }

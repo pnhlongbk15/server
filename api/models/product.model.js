@@ -35,7 +35,7 @@ const Orders = function (order) {
 }
 
 const DetailOrder = function (detail) {
-        this.id = detail.id;
+        this.detailId = detail.detailId;
         this.orderId = detail.orderId; // lay o order
         this.productId = detail.productId;
         this.quantity = detail.quantity;
