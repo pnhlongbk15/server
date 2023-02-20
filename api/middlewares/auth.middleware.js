@@ -1,6 +1,6 @@
 const { User } = require('../services/user.service');
-const tokenUtil = require('../utils/token');
-const passwordUtil = require('../utils/password');
+const tokenUtil = require('../helpers/token');
+const passwordUtil = require('../helpers/password');
 
 module.exports = {
     checkIsUserExist: (req, res, next) => {
