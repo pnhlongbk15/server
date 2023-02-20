@@ -1,7 +1,6 @@
 const productRoute = require('express').Router();
 
 const product = require('../controllers/product.controller')
-const admin = require('../controllers/admin.controller')
 const authMiddleware = require('../middlewares/auth.middleware')
 
 // get all product

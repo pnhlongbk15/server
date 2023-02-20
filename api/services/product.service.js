@@ -1,6 +1,6 @@
-const { Attribute, Product, ByProduct, Orders, DetailOrder } = require('../../../database/mySql/model/product.model')
+const { Attribute, Product, ByProduct, Orders, DetailOrder } = require('../models/product.model')
 
-const sql = require('../../../database/mySql/db.connection');
+const sql = require('../configs/db.connection');
 
 
 Product.getCategory = (cb) => {
