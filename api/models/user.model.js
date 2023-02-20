@@ -1,5 +1,5 @@
 const User = function (user) {
-        this.id = user.id;
+        this.userId = user.userId;
         this.username = user.username;
         this.sex = user.sex;
         this.birth = user.birth;
@@ -10,7 +10,7 @@ const User = function (user) {
 }
 
 const Address = function (address) {
-        this.id = address.id;
+        this.addressId = address.addressId;
         this.fullName = address.fullName;
         this.phone = address.phone;
         this.address = address.address;

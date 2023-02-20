@@ -63,10 +63,10 @@ Product.searchInTable = (product, data, cb) => {
 
 Product.findAllByCategory = (data, cb) => {
    let statement = `  
-                        SELECT p.id, p.title, p.price, p.image, p.category, a.rating, a.brand
-                        FROM product as p
-                        LEFT JOIN attribute as a
-                        ON p.attrId = a.id  
+                        SELECT p.productId, p.title, p.price, p.image, p.category, a.rating, a.brand
+                        FROM Product as p
+                        LEFT JOIN Attribute as a
+                        ON p.attrId = a.attrId  
                         ORDER BY ${data.sort} ${data.order} LIMIT ${data.limit} OFFSET ${data.page * data.limit} 
                         `
    if (data.category?.length) {
