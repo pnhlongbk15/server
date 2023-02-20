@@ -1,5 +1,5 @@
 require('dotenv/config');
-const routes = require('./api/routes/route');
+// const routes = require('./api/routes/route');
 
 // app
 const express = require('express');
@@ -28,4 +28,4 @@ app.set('views', 'api/views');
 app.use(express.static('api/public'));
 
 // routes
-routes(app);
+// routes(app);
