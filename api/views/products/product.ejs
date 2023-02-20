@@ -1,0 +1,27 @@
+<div class="product">
+  <form action="/api/admin/products" method="POST">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" placeholder="name of product..." 
+    <% if (typeof name !="undefined" && name) { %> value="<%= name %>" <% } %> required />
+    
+    <label for="description">Description:</label>
+    <textarea type="text" id="description" rows="10" name="description" placeholder="description..."></textarea>
+
+    <label for="price">Price:</label>
+    <input type="text" id="price" name="price" 
+      <% if (typeof price !="undefined" && price) { %> value="<%= price %>" <% } %> required />
+
+    <label for="inStock">Count in stock:</label>
+    <input type="text" id="inStock" name="countInStock" 
+      <% if (typeof countInStock !="undefined" && countInStock) { %> value="<%= countInStock %>" <% } %> required />
+    <label for="link">Link:</label>
+    <input type="text" id="link" name="link" />
+    <input type="submit" />
+  </form>
+  <div>
+    <p>Notice:</p>
+    <% if (typeof message !="undefined" && message) { %>
+      <p><%= message%></p>
+    <%} %>
+  </div>
+</div>

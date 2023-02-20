@@ -1,0 +1,40 @@
+.login {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: lightgray;
+}
+.login > .container {
+        background-color: #ffffff;
+        border-radius: 20px;
+        overflow: hidden;
+}
+.login h1 {
+        font-weight: 400;
+        background-color: lightcoral;
+        padding: 20px;
+}
+.login  form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 20px;
+}
+
+.login form > input:nth-child(even) {
+        border: none;
+        background-color: lightgrey;
+        padding: 5px 10px;
+        width: 20vw;
+        margin-bottom: 20px;
+        margin-top: 5px;
+}
+.login form > input[type="submit"] {
+        align-self: center;
+        padding: 5px 10px;
+        border: none;
+        background-color: lightgreen;
+        cursor: pointer;
+}

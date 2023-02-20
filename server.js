@@ -1,20 +1,32 @@
-// Import packages
-const express = require("express");
-const home = require("./routes/home");
+require('dotenv/config');
+const conn = require('./database/mySql/db.connection');
+const routes = require('./api/routes');
 
-// Middlewares
+// app
+const express = require('express');
 const app = express();
+const PORT = process.env.PORT || 4000;
+app.listen(PORT, () => {
+        console.log(`Server is running on localhost:${PORT}`);
+});
+
+// middle-ware
+//cors
 const cors = require('cors')
 app.use(cors({
         origin: '*'
 }))
-app.use(express.json())
+//body-parser
+const bodyParser = require('body-parser');
+app.use(bodyParser.json()); // dạng truyền lên là json()
+app.use(bodyParser.urlencoded({ extended: true })); // dạng truyền lên từ form
+// ejs-template
+const expressLayouts = require('express-ejs-layouts');
+app.use(expressLayouts);
+app.set('view engine', 'ejs');
+// app.set('layout', 'master') '' default is layout if use other name , need set
+app.set('views', 'api/views');
+app.use(express.static('api/public'));
 
-// Routes
-// app.use("/home", home);
-const routes = require('./api/routes/route');
-routes(app)
-
-// connection
-const port = process.env.PORT || 9001;
-app.listen(port, () => console.log(`Listening to port ${port}`));
+// routes
+routes(app);
