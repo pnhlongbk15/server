@@ -7,7 +7,7 @@ const conn = mysql.createConnection({
         password: dbConfig.PASSWORD,
         database: dbConfig.DB,
         connectionLimit: 100,
-        multipleStatements: true
+        multipleStatements: true,
 });
 
 conn.connect(error => {
