@@ -6,10 +6,10 @@ const home = require("./routes/home");
 const app = express();
 // require('./middleParty')(app)
  // cors
- const cors = require('cosrs')
- app.use(cors({
-         origin: '*'
- }))
+//  const cors = require('cosrs')
+//  app.use(cors({
+//          origin: '*'
+//  }))
 
  // content-type access
  app.use(express.json());
