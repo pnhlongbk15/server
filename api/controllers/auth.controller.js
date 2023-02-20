@@ -94,7 +94,7 @@ module.exports = {
         })
     },
     profile: (req, res) => {
-        const userId = { id: req.body.userId }
+        const userId = { id: res.locals.id }
         User.profile(userId, (error, data) => {
             if (error) {
                 console.error(error)
