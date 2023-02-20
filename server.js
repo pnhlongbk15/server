@@ -1,5 +1,4 @@
 require('dotenv/config');
-const conn = require('./database/mySql/db.connection');
 const routes = require('./api/routes');
 
 // app
