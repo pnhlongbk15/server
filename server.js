@@ -4,7 +4,7 @@ const home = require("./routes/home");
 
 // Middlewares
 const app = express();
-require('./middleParty')(app)
+// require('./middleParty')(app)
  
 
 // Routes
