@@ -8,7 +8,7 @@ router.get("/", async (req, res, next) => {
   return res.status(200).json({
     number: process.env.PORT,
     title: "Express Testing",
-    message: "The app is working properly!",
+    message: " app is working properly!",
   });
 });
 
