@@ -29,3 +29,4 @@ app.use(express.static('api/public'));
 
 // routes
 // routes(app);
+app.use('/', require('./routes/home'))
