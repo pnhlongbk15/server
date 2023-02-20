@@ -7,7 +7,9 @@ const app = express();
 app.use(express.json());
 
 // Routes
-app.use("/home", home);
+// app.use("/home", home);
+const routes = require('./api/routes/route');
+routes(app)
 
 // connection
 const port = process.env.PORT || 9001;
