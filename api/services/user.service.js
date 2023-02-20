@@ -1,4 +1,4 @@
-const { User, Address } = require('.../models/user.model')
+const { User, Address } = require('../models/user.model')
 const sql = require('../configs/db.connection')
 
 User.create = (newUser, cb) => {
