@@ -4,7 +4,10 @@ const home = require("./routes/home");
 
 // Middlewares
 const app = express();
-
+const cors = require('cors')
+app.use(cors({
+        origin: '*'
+}))
 app.use(express.json())
 
 // Routes
