@@ -4,8 +4,11 @@ const home = require("./routes/home");
 
 // Middlewares
 const app = express();
-// require('./middleParty')(app)
- 
+const cors = require('cosrs')
+app.use(cors({
+        origin: '*'
+}))
+app.use(express.json())
 
 // Routes
 // app.use("/home", home);
